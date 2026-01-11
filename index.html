@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property VA Guide 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a202c;
+            padding: 1%;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4c51bf 0%, #6b46c1 100%);
+            color: white;
+            padding: 15px 1%;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            margin-top: 4px;
+        }
+        
+        nav {
+            background: #f7fafc;
+            padding: 8px 1%;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+        }
+        
+        .tab-btn {
+            padding: 8px 14px;
+            background: white;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn:hover {
+            background: #edf2f7;
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: #4c51bf;
+            color: white;
+            border-color: #4c51bf;
+        }
+        
+        .content {
+            padding: 1%;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #4c51bf;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(76,81,191,0.2);
+        }
+        
+        h2 {
+            font-size: 1.1rem;
+            color: #4c51bf;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h3 {
+            font-size: 0.95rem;
+            color: #2d3748;
+            margin: 10px 0 6px 0;
+        }
+        
+        p, li {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+        
+        ul, ol {
+            margin-left: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background: #fef5e7;
+            border-left: 3px solid #f39c12;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        
+        .tip {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        
+        .warning {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: #4c51bf;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 12px 1%;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Property VA Instructions Guide</h1>
+            <div class="subtitle">Filipino Property Virtual Assistant | 2026 Edition</div>
+        </header>
+        
+        <nav>
+            <button class="tab-btn active" onclick="showSection('overview')">Overview</button>
+            <button class="tab-btn" onclick="showSection('listing')">Property Listing</button>
+            <button class="tab-btn" onclick="showSection('client')">Client Management</button>
+            <button class="tab-btn" onclick="showSection('showing')">Property Showing</button>
+            <button class="tab-btn" onclick="showSection('documentation')">Documentation</button>
+            <button class="tab-btn" onclick="showSection('marketing')">Marketing & Social</button>
+            <button class="tab-btn" onclick="showSection('pricing')">Pricing & Valuation</button>
+            <button class="tab-btn" onclick="showSection('legal')">Legal & Compliance</button>
+            <button class="tab-btn" onclick="showSection('tools')">Tools & Resources</button>
+        </nav>
+        
+        <div class="content">
+            <div id="overview" class="section active">
+                <div class="card">
+                    <h2><span class="icon">1</span> What is a Property VA?</h2>
+                    <p>A Property Virtual Assistant (VA) provides remote administrative and operational support to real estate professionals, property managers, and real estate agencies in the Philippines. You help streamline operations, manage listings, coordinate with clients, and handle documentation.</p>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">2</span> Core Responsibilities</h2>
+                    <ul class="checklist">
+                        <li>Managing property listings across multiple platforms</li>
+                        <li>Responding to client inquiries via email, phone, and messaging apps</li>
+                        <li>Scheduling property viewings and coordinating with agents</li>
+                        <li>Preparing documents (contracts, listing agreements, reports)</li>
+                        <li>Conducting market research and property valuations</li>
+                        <li>Managing social media accounts and marketing campaigns</li>
+                        <li>Maintaining CRM databases and client records</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight">
+                    <h3>⚡ Quick Start Tips</h3>
+                    <p>Always maintain professional communication, respond to inquiries within 24 hours, keep detailed records of all transactions, and familiarize yourself with Philippine real estate laws and regulations.</p>
+                </div>
+            </div>
+            
+            <div id="listing" class="section">
+                <div class="card">
+                    <h2><span class="icon">📝</span> Creating Property Listings</h2>
+                    
+                    <h3>Step 1: Gather Property Information</h3>
+                    <ol>
+                        <li>Property type (house, condo, lot, commercial)</li>
+                        <li>Location (barangay, city, province)</li>
+                        <li>Size (lot area, floor area in sqm)</li>
+                        <li>Number of bedrooms and bathrooms</li>
+                        <li>Price (sale or rental amount)</li>
+                        <li>Property features and amenities</li>
+                        <li>Title information (TCT, CCT, etc.)</li>
+                    </ol>
+                    
+                    <h3>Step 2: Take Quality Photos</h3>
+                    <ul>
+                        <li>Capture exterior from multiple angles</li>
+                        <li>Photograph all rooms in good lighting</li>
+                        <li>Highlight unique features (pool, garden, view)</li>
+                        <li>Ensure images are clear and high-resolution</li>
+                        <li>Include 8-15 photos per listing</li>
+                    </ul>
+                    
+                    <h3>Step 3: Write Compelling Descriptions</h3>
+                    <div class="tip">
+                        <p><strong>Format:</strong> Start with a catchy headline, describe key features, mention nearby landmarks (schools, malls, transport), include payment terms, and end with a call-to-action.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🌐</span> Posting on Platforms</h2>
+                    <ul>
+                        <li><strong>Lamudi.com.ph</strong> - Major property portal</li>
+                        <li><strong>Property24.com.ph</strong> - Popular listing site</li>
+                        <li><strong>Dot Property</strong> - Real estate marketplace</li>
+                        <li><strong>Facebook Marketplace</strong> - Free local listings</li>
+                        <li><strong>Carousell</strong> - Buy and sell platform</li>
+                        <li><strong>OLX Philippines</strong> - Classifieds site</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="client" class="section">
+                <div class="card">
+                    <h2><span class="icon">👥</span> Client Communication</h2>
+                    
+                    <h3>Initial Contact Protocol</h3>
+                    <ol>
+                        <li>Greet professionally: "Good day! Thank you for your interest in [property]"</li>
+                        <li>Confirm their requirements (budget, location, size)</li>
+                        <li>Provide detailed property information</li>
+                        <li>Offer to schedule a viewing</li>
+                        <li>Collect contact details for follow-up</li>
+                    </ol>
+                    
+                    <h3>Common Client Questions</h3>
+                    <ul>
+                        <li><strong>Price negotiable?</strong> - Check with agent/owner first</li>
+                        <li><strong>When available?</strong> - Provide exact dates</li>
+                        <li><strong>Payment terms?</strong> - Explain downpayment, installment options</li>
+                        <li><strong>Documents needed?</strong> - List requirements clearly</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        <p><strong>Important:</strong> Never guarantee approval or make promises you cannot keep. Always verify information with your principal agent before confirming details to clients.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📊</span> CRM Management</h2>
+                    <p>Maintain organized client records including contact information, property preferences, budget range, viewing history, follow-up dates, and transaction status. Update the CRM daily and set reminders for follow-ups.</p>
+                </div>
+            </div>
+            
+            <div id="showing" class="section">
+                <div class="card">
+                    <h2><span class="icon">🏡</span> Scheduling Property Viewings</h2>
+                    
+                    <h3>Coordination Steps</h3>
+                    <ol>
+                        <li>Confirm client's preferred date and time</li>
+                        <li>Check property availability with owner/caretaker</li>
+                        <li>Assign available agent for showing</li>
+                        <li>Send confirmation message to all parties</li>
+                        <li>Provide directions and contact numbers</li>
+                        <li>Follow up after viewing for feedback</li>
+                    </ol>
+                    
+                    <h3>Viewing Confirmation Template</h3>
+                    <div class="highlight">
+                        <p><em>"Good day! Your property viewing is confirmed for [Date] at [Time]. Property: [Address]. Our agent [Name] will meet you there. Contact: [Phone]. Please reply to confirm. Looking forward to serving you!"</em></p>
+                    </div>
+                    
+                    <h3>Post-Viewing Follow-up</h3>
+                    <ul>
+                        <li>Send thank you message within 24 hours</li>
+                        <li>Ask for feedback on the property</li>
+                        <li>Offer similar properties if not interested</li>
+                        <li>Discuss next steps if interested</li>
+                        <li>Update CRM with viewing results</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="documentation" class="section">
+                <div class="card">
+                    <h2><span class="icon">📄</span> Essential Documents</h2>
+                    
+                    <h3>For Sale Transactions</h3>
+                    <ul class="checklist">
+                        <li>Deed of Absolute Sale (DAS)</li>
+                        <li>Transfer Certificate of Title (TCT)</li>
+                        <li>Tax Declaration</li>
+                        <li>Real Property Tax Receipts</li>
+                        <li>Certificate Authorizing Registration (CAR)</li>
+                        <li>Lot Plan / Survey Plan</li>
+                        <li>Valid IDs of buyer and seller</li>
+                    </ul>
+                    
+                    <h3>For Lease/Rental</h3>
+                    <ul class="checklist">
+                        <li>Contract of Lease</li>
+                        <li>Barangay Clearance</li>
+                        <li>Valid IDs (lessor and lessee)</li>
+                        <li>Proof of Income</li>
+                        <li>Post-dated checks for rent</li>
+                        <li>Inventory of fixtures</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">✍️</span> Document Preparation</h2>
+                    <p>Ensure all documents are complete, accurate, and properly notarized. Create digital copies for records. Organize files by property and transaction type. Use cloud storage for backup and easy access.</p>
+                    
+                    <div class="tip">
+                        <p><strong>Pro Tip:</strong> Create document templates for common forms to save time. Always double-check names, addresses, and amounts before finalizing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="marketing" class="section">
+                <div class="card">
+                    <h2><span class="icon">📱</span> Social Media Marketing Strategy</h2>
+                    
+                    <h3>Platform Priority for PH Market</h3>
+                    <ol>
+                        <li><strong>Facebook</strong> - Primary platform (90% of Filipino internet users)</li>
+                        <li><strong>Instagram</strong> - Visual properties and luxury market</li>
+                        <li><strong>TikTok</strong> - Short property tours, younger buyers</li>
+                        <li><strong>YouTube</strong> - Full property walkthroughs</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">✍️</span> Creating Engaging Property Posts</h2>
+                    
+                    <h3>Post Formula That Works</h3>
+                    <div class="highlight">
+                        <p><strong>Hook:</strong> "3BR House for only ₱25K/month!"<br>
+                        <strong>Location:</strong> "📍 Near SM Fairview, Quezon City"<br>
+                        <strong>Features:</strong> List 3-5 best features with emojis<br>
+                        <strong>Price:</strong> Clear, bold pricing<br>
+                        <strong>CTA:</strong> "PM us for viewing! 📲"</p>
+                    </div>
+                    
+                    <h3>Best Posting Times (Philippine Time)</h3>
+                    <ul>
+                        <li><strong>Weekdays:</strong> 7-9 AM (before work), 12-1 PM (lunch), 6-9 PM (after work)</li>
+                        <li><strong>Weekends:</strong> 9-11 AM, 2-4 PM, 7-9 PM</li>
+                        <li><strong>Best days:</strong> Tuesday, Wednesday, Saturday</li>
+                    </ul>
+                    
+                    <h3>Effective Hashtags for Filipino Market</h3>
+                    <div class="tip">
+                        <p><strong>General:</strong> #PropertyPH #RealEstatePH #BahayPH #CondoPH<br>
+                        <strong>Location:</strong> #ManilaProperty #QuezonCityHomes #CebuRealEstate<br>
+                        <strong>Type:</strong> #HouseAndLot #CondoForRent #LotForSale<br>
+                        <strong>Audience:</strong> #OFWInvestment #FirstTimeHomeBuyer #RentToOwn</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📸</span> Content Creation Tips</h2>
+                    
+                    <h3>Photo Best Practices</h3>
+                    <ul class="checklist">
+                        <li>Take photos during daylight (10 AM - 3 PM best)</li>
+                        <li>Turn on all lights in the property</li>
+                        <li>Stage the property (clean, organized, minimal clutter)</li>
+                        <li>Shoot from corners to show more space</li>
+                        <li>Include lifestyle shots (nearby mall, school, church)</li>
+                        <li>Use portrait mode for professional look</li>
+                    </ul>
+                    
+                    <h3>Video Content Ideas</h3>
+                    <ul>
+                        <li><strong>Property Walkthroughs:</strong> 1-3 minute tours with voiceover</li>
+                        <li><strong>Neighborhood Tours:</strong> Show nearby amenities</li>
+                        <li><strong>Before & After:</strong> Renovation transformations</li>
+                        <li><strong>Client Testimonials:</strong> Happy buyer/renter reviews</li>
+                        <li><strong>Market Updates:</strong> Weekly property trends</li>
+                        <li><strong>Tips & Advice:</strong> Home buying process, financing options</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        <p><strong>Always ask permission</strong> from property owners before posting photos/videos online. Respect privacy and security concerns.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">💰</span> Facebook Ads Basics</h2>
+                    
+                    <h3>Setting Up Property Ads</h3>
+                    <ol>
+                        <li>Use Facebook Business Manager</li>
+                        <li>Set objective: "Traffic" or "Messages"</li>
+                        <li>Target by location (5-15km radius from property)</li>
+                        <li>Demographics: Age 25-45, interested in real estate</li>
+                        <li>Budget: Start with ₱100-300/day</li>
+                        <li>Run ads for 3-7 days, analyze results</li>
+                    </ol>
+                    
+                    <h3>Ad Copy That Converts</h3>
+                    <div class="highlight">
+                        <p><em>"🏠 READY FOR OCCUPANCY | 3BR House & Lot<br>
+                        📍 5 mins to Alabang Town Center<br>
+                        ✅ 2 Parking Spaces<br>
+                        ✅ 24/7 Security<br>
+                        ✅ Clean Title<br>
+                        💵 ₱8.5M | Flexible Payment Terms<br>
+                        📞 Message us NOW for site visit!"</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📊</span> Engagement Strategies</h2>
+                    
+                    <h3>Boost Engagement</h3>
+                    <ul>
+                        <li>Reply to comments within 1 hour</li>
+                        <li>Use polls: "House or Condo?" "Which location?"</li>
+                        <li>Share success stories and happy clients</li>
+                        <li>Go live during property viewings (with permission)</li>
+                        <li>Create carousel posts showing different angles</li>
+                        <li>Post consistently (1-2 times daily)</li>
+                    </ul>
+                    
+                    <h3>Building Your Following</h3>
+                    <ul>
+                        <li>Join FB groups: Property buyers, OFW groups, local community groups</li>
+                        <li>Collaborate with local businesses (home decor, movers, banks)</li>
+                        <li>Share valuable content beyond listings (home tips, market news)</li>
+                        <li>Run contests (share & tag for chance to win consultation)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="pricing" class="section">
+                <div class="card">
+                    <h2><span class="icon">💵</span> Property Valuation Basics</h2>
+                    
+                    <h3>Key Factors Affecting Price in PH</h3>
+                    <ul>
+                        <li><strong>Location:</strong> Proximity to Metro Manila, CBD, transport hubs</li>
+                        <li><strong>Accessibility:</strong> Near MRT/LRT, major roads, EDSA, C5, SLEX</li>
+                        <li><strong>Development:</strong> New malls, schools, hospitals nearby</li>
+                        <li><strong>Lot Size & Floor Area:</strong> Square meter measurements</li>
+                        <li><strong>Property Age:</strong> Brand new, 5-10 years, 10+ years</li>
+                        <li><strong>Title Type:</strong> TCT (higher value) vs CCT or tax declaration only</li>
+                        <li><strong>Amenities:</strong> Pool, gym, clubhouse, parking, security</li>
+                        <li><strong>Flood-prone Areas:</strong> Significantly lower prices</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🔍</span> How to Research Comparable Properties</h2>
+                    
+                    <h3>Step-by-Step Comparison</h3>
+                    <ol>
+                        <li>Find 3-5 similar properties in same area (within 1-2km radius)</li>
+                        <li>Match property type, size, and age as closely as possible</li>
+                        <li>Check recent sold prices (last 3-6 months)</li>
+                        <li>Look at current listings on Lamudi, Property24, Facebook</li>
+                        <li>Note differences (renovations, view, floor level)</li>
+                        <li>Calculate average price per square meter</li>
+                    </ol>
+                    
+                    <h3>Price Per SQM Calculation</h3>
+                    <div class="highlight">
+                        <p><strong>Formula:</strong> Total Price ÷ Floor Area (sqm) = Price per SQM<br><br>
+                        <strong>Example:</strong><br>
+                        Property Price: ₱5,000,000<br>
+                        Floor Area: 120 sqm<br>
+                        Price per SQM: ₱5,000,000 ÷ 120 = ₱41,667/sqm</p>
+                    </div>
+                    
+                    <div class="tip">
+                        <p><strong>Use this to quickly estimate:</strong> If similar properties sell for ₱40,000/sqm, and your listing is 150 sqm, estimated value is around ₱6,000,000</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📈</span> Average Prices by Metro Manila Area (2026)</h2>
+                    
+                    <h3>Prime Locations (₱/sqm)</h3>
+                    <ul>
+                        <li><strong>Makati CBD:</strong> ₱200,000 - ₱350,000</li>
+                        <li><strong>BGC, Taguig:</strong> ₱180,000 - ₱320,000</li>
+                        <li><strong>Ortigas Center:</strong> ₱150,000 - ₱250,000</li>
+                        <li><strong>Alabang:</strong> ₱120,000 - ₱200,000</li>
+                    </ul>
+                    
+                    <h3>Mid-Range Areas (₱/sqm)</h3>
+                    <ul>
+                        <li><strong>Quezon City:</strong> ₱80,000 - ₱150,000</li>
+                        <li><strong>Pasig:</strong> ₱90,000 - ₱160,000</li>
+                        <li><strong>Mandaluyong:</strong> ₱100,000 - ₱170,000</li>
+                        <li><strong>Parañaque:</strong> ₱70,000 - ₱130,000</li>
+                    </ul>
+                    
+                    <h3>Emerging Areas (₱/sqm)</h3>
+                    <ul>
+                        <li><strong>Marikina:</strong> ₱50,000 - ₱90,000</li>
+                        <li><strong>Las Piñas:</strong> ₱45,000 - ₱85,000</li>
+                        <li><strong>Caloocan:</strong> ₱40,000 - ₱75,000</li>
+                        <li><strong>Cavite (near Manila):</strong> ₱35,000 - ₱70,000</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        <p><strong>Note:</strong> These are general estimates. Actual prices vary widely based on specific location, property condition, and market conditions. Always research current listings.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">💳</span> Common Pricing Strategies</h2>
+                    
+                    <h3>For Sale Properties</h3>
+                    <ul>
+                        <li><strong>Cash Basis:</strong> Full payment, usually 5-10% discount</li>
+                        <li><strong>Bank Financing:</strong> 20% down payment, 80% bank loan (15-20 years)</li>
+                        <li><strong>In-House Financing:</strong> 10-30% down, monthly amortization (5-10 years)</li>
+                        <li><strong>Rent-to-Own:</strong> Monthly rent with option to buy after 1-3 years</li>
+                        <li><strong>Deferred Cash:</strong> Down payment now, balance in 6-12 months</li>
+                    </ul>
+                    
+                    <h3>Monthly Amortization Estimate</h3>
+                    <div class="highlight">
+                        <p><strong>Quick Formula (approx):</strong><br>
+                        Loan Amount × 0.008 = Monthly Payment (for 15-year loan at 7% interest)<br><br>
+                        <strong>Example:</strong><br>
+                        ₱4,000,000 loan × 0.008 = ₱32,000/month</p>
+                    </div>
+                    
+                    <h3>Rental Pricing Guide</h3>
+                    <ul>
+                        <li><strong>Studio/1BR Condo:</strong> ₱12,000 - ₱25,000/month</li>
+                        <li><strong>2BR Condo:</strong> ₱20,000 - ₱45,000/month</li>
+                        <li><strong>3BR House:</strong> ₱25,000 - ₱60,000/month</li>
+                        <li><strong>Commercial Space:</strong> ₱500 - ₱1,500 per sqm/month</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <p><strong>Rental ROI Target:</strong> Annual rent should be 5-8% of property value. If property is worth ₱5M, annual rent should be ₱250,000-₱400,000 (₱21,000-₱33,000/month)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="legal" class="section">
+                <div class="card">
+                    <h2><span class="icon">⚖️</span> Understanding Philippine Property Laws</h2>
+                    
+                    <h3>Key Legal Principles</h3>
+                    <ul>
+                        <li><strong>Foreign Ownership:</strong> Foreigners cannot own land, but can own condos (up to 40% foreign ownership per building)</li>
+                        <li><strong>Torrens System:</strong> PH uses title registration system for land ownership</li>
+                        <li><strong>Prescription Period:</strong> 10 years for ordinary, 30 years for extraordinary possession</li>
+                        <li><strong>Community Property:</strong> Property acquired during marriage is conjugal (both spouses own)</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📋</span> Types of Land Titles in PH</h2>
+                    
+                    <h3>Title Hierarchy (Best to Least Secure)</h3>
+                    <ol>
+                        <li><strong>TCT (Transfer Certificate of Title):</strong> Most secure, registered with Registry of Deeds, has owner's name</li>
+                        <li><strong>CCT (Condominium Certificate of Title):</strong> For condo units, includes unit number and building</li>
+                        <li><strong>OCT (Original Certificate of Title):</strong> First title issued for land</li>
+                        <li><strong>Tax Declaration:</strong> NOT proof of ownership, only for tax purposes</li>
+                        <li><strong>Deed of Sale:</strong> Transfer document, not title itself</li>
+                    </ol>
+                    
+                    <div class="warning">
+                        <p><strong>Red Flag:</strong> If seller only has Tax Declaration or Deed of Sale but no TCT/CCT, verify thoroughly with Registry of Deeds. Could be fake or disputed property.</p>
+                    </div>
+                    
+                    <h3>Verifying Authentic Titles</h3>
+                    <ul class="checklist">
+                        <li>Check with Registry of Deeds in the city/municipality</li>
+                        <li>Request Certified True Copy (CTC) of title</li>
+                        <li>Verify owner's name matches seller's ID</li>
+                        <li>Check for annotations (mortgage, liens, disputes)</li>
+                        <li>Look for security features (watermark, seal)</li>
+                        <li>Verify TCT number with Registry</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🚨</span> Common Property Scams to Avoid</h2>
+                    
+                    <h3>Warning Signs</h3>
+                    <div class="warning">
+                        <p><strong>Fake Titles:</strong> Photocopied titles, missing security features, wrong format<br>
+                        <strong>Duplicate Selling:</strong> Property sold to multiple buyers<br>
+                        <strong>Squatter Issues:</strong> Professional squatters claim ownership<br>
+                        <strong>Boundary Disputes:</strong> Neighbors claiming overlap<br>
+                        <strong>Estate Sales:</strong> Heirs not agreeing, fake heirs appearing<br>
+                        <strong>Foreclosed Properties:</strong> Bank ownership not clear yet</p>
+                    </div>
+                    
+                    <h3>How to Protect Buyers</h3>
+                    <ol>
+                        <li>Always verify title at Registry of Deeds</li>
+                        <li>Conduct ocular inspection with surveyor</li>
+                        <li>Check property with Barangay for issues</li>
+                        <li>Request tax clearance and receipts</li>
+                        <li>Hire lawyer for title investigation</li>
+                        <li>Insist on meeting at property location</li>
+                        <li>Never pay full amount before title transfer</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">✅</span> Seller Verification Checklist</h2>
+                    
+                    <h3>Documents to Request</h3>
+                    <ul class="checklist">
+                        <li>Original TCT/CCT (inspect, don't accept photocopy only)</li>
+                        <li>Valid government ID matching title name</li>
+                        <li>Latest Tax Declaration and receipts</li>
+                        <li>Real Property Tax clearance</li>
+                        <li>Lot plan approved by LRA</li>
+                        <li>Barangay clearance</li>
+                        <li>If married: Marriage certificate + spouse consent</li>
+                        <li>If inherited: Death certificate + extrajudicial settlement</li>
+                        <li>If corporation: Board resolution, SEC certificate</li>
+                    </ul>
+                    
+                    <h3>Red Flags to Watch</h3>
+                    <ul>
+                        <li>Seller rushing the transaction ("sign today!")</li>
+                        <li>Refusing to meet at the property</li>
+                        <li>Price significantly below market (too good to be true)</li>
+                        <li>Unwilling to provide original documents</li>
+                        <li>No clear explanation for annotations on title</li>
+                        <li>Multiple "representatives" claiming to handle sale</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">💰</span> Taxes & Fees in Property Transactions</h2>
+                    
+                    <h3>Buyer's Responsibilities (Purchase)</h3>
+                    <ul>
+                        <li><strong>Transfer Tax:</strong> 0.5% - 0.75% of selling price or zonal value (whichever is higher)</li>
+                        <li><strong>Documentary Stamp Tax (DST):</strong> ₱15.00 per ₱1,000 of selling price</li>
+                        <li><strong>Registration Fee:</strong> Varies, roughly ₱3,000 - ₱10,000</li>
+                        <li><strong>Notarial Fee:</strong> 1% - 2% of selling price</li>
+                        <li><strong>Miscellaneous Fees:</strong> Certifications, documentary requirements</li>
+                    </ul>
+                    
+                    <h3>Seller's Responsibilities (Sale)</h3>
+                    <ul>
+                        <li><strong>Capital Gains Tax (CGT):</strong> 6% of selling price or zonal value (whichever is higher)</li>
+                        <li><strong>OR</strong> Income Tax if habitually selling (varies by bracket)</li>
+                        <li><strong>Real Property Tax:</strong> Must be current (no arrears)</li>
+                        <li><strong>Withholding Tax:</strong> If applicable, 6% or based on tax bracket</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <h3>Total Cost Estimate</h3>
+                        <p><strong>Buyer typically pays:</strong> 3-5% of property value in taxes/fees<br>
+                        <strong>Seller typically pays:</strong> 6-8% in capital gains tax and fees<br><br>
+                        <strong>Example:</strong> ₱5M property<br>
+                        Buyer: ₱150,000 - ₱250,000<br>
+                        Seller: ₱300,000 - ₱400,000</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">🏦</span> Buyer Qualification Requirements</h2>
+                    
+                    <h3>Bank Financing Requirements</h3>
+                    <ul class="checklist">
+                        <li>21-65 years old at loan maturity</li>
+                        <li>Minimum monthly income: ₱30,000 - ₱50,000</li>
+                        <li>Employed for at least 2 years (or 1 year if corporate)</li>
+                        <li>Clean credit history (no bad loans)</li>
+                        <li>Debt-to-income ratio below 40%</li>
+                        <li>Property appraised value meets bank standards</li>
+                    </ul>
+                    
+                    <h3>Documents Needed for Bank Loan</h3>
+                    <ul>
+                        <li>Valid IDs (2 government-issued)</li>
+                        <li>Proof of income (payslips, ITR, bank statements)</li>
+                        <li>Certificate of employment</li>
+                        <li>Proof of billing (meralco, water)</li>
+                        <li>Marriage certificate (if married)</li>
+                        <li>Birth certificates of dependents</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <p><strong>Loan Approval Timeline:</strong> Typically 30-60 days from complete documents submission to release of funds</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tools" class="section">
+                <div class="card">
+                    <h2><span class="icon">🛠️</span> Essential VA Tools</h2>
+                    
+                    <h3>Communication</h3>
+                    <ul>
+                        <li><strong>Viber/WhatsApp</strong> - Client messaging</li>
+                        <li><strong>Zoom/Google Meet</strong> - Virtual meetings</li>
+                        <li><strong>Gmail/Outlook</strong> - Professional email</li>
+                        <li><strong>Facebook Messenger</strong> - Social inquiries</li>
+                    </ul>
+                    
+                    <h3>Organization & Productivity</h3>
+                    <ul>
+                        <li><strong>Google Calendar</strong> - Scheduling viewings</li>
+                        <li><strong>Trello/Asana</strong> - Task management</li>
+                        <li><strong>Google Sheets</strong> - Property databases</li>
+                        <li><strong>Notion</strong> - Documentation hub</li>
+                    </ul>
+                    
+                    <h3>Design & Marketing</h3>
+                    <ul>
+                        <li><strong>Canva</strong> - Property flyers and posts</li>
+                        <li><strong>CapCut</strong> - Video editing for tours</li>
+                        <li><strong>Facebook Business Suite</strong> - Social media management</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2><span class="icon">📚</span> Helpful Resources</h2>
+                    <ul>
+                        <li><strong>DHSUD</strong> - Department of Human Settlements and Urban Development</li>
+                        <li><strong>HLURB</strong> - Housing and Land Use Regulatory Board</li>
+                        <li><strong>LRA</strong> - Land Registration Authority</li>
+                        <li><strong>BIR</strong> - Bureau of Internal Revenue (tax info)</li>
+                        <li><strong>PRC</strong> - Professional Regulation Commission (broker licenses)</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight">
+                    <h3>💡 Best Practices</h3>
+                    <ul>
+                        <li>Always maintain client confidentiality</li>
+                        <li>Keep learning about real estate market trends</li>
+                        <li>Build good relationships with agents and brokers</li>
+                        <li>Stay updated on property laws and regulations</li>
+                        <li>Be honest and transparent in all dealings</li>
+                        <li>Continuously improve your communication skills</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Property VA Instructions Guide © 2026 | Filipino Real Estate Virtual Assistant Reference</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
